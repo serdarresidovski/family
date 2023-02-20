@@ -9,7 +9,7 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [registerStatus, setRegisterStatus] = useState("");
+  const [loginStatus, setLoginStatus] = useState("");
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -17,32 +17,25 @@ const HomeScreen = () => {
     });
   }, []);
 
-  const handleRegister = () => {
-    firebase.createUserWithEmailAndPassword(firebase.auth, email, password)
-      .then(() => {
-        setRegisterStatus("Registration successful");
-        console.log("User registered successfully");
-      })
-      .catch((error) => {
-        setRegisterStatus(error.message);
-        console.log(error);
-      });
-  };
+
+  
 
   const handleLogin = () => {
     firebase.signInWithEmailAndPassword(firebase.auth, email, password)
       .then(() => {
         console.log("User logged in successfully");
-        navigation.replace("WelcomeScreen"); // replace current screen with WelcomeScreen
+        navigation.replace("WelcomeScreen"); 
       })
       .catch((error) => {
-        console.log(error);
+        setLoginStatus("incorrect e-mail or password");
       });
   };
   
   const handleForgotPassword = () => {
     navigation.navigate("ForgotPasswordScreen");
   };
+
+  
   
 
   return (
@@ -72,18 +65,22 @@ const HomeScreen = () => {
 
         <TextInput
           color="#64748b"
-          placeholder="**"
+          placeholder="Enter your password"
           secureTextEntry={true}
           className="box-border h-12 w-64 px-4 self-center bg-slate-200 rounded-3xl"
           value={password}
           onChangeText={setPassword}
           />
 
-        {registerStatus ? (
-          <Text style={{ color: registerStatus.startsWith("Registration successful") ? "green" : "red", marginBottom: 10, marginLeft: 30 }}>
-            {registerStatus}
+      
+
+
+      {loginStatus ? (
+          <Text style={{ color: loginStatus.startsWith("incorrect e-mail or password") ? "red" : "red", marginBottom: 10, marginLeft: 30 }}>
+            {loginStatus}
           </Text>
         ) : null}
+
 
         <TouchableOpacity
           onPress={handleLogin}
@@ -109,33 +106,11 @@ const HomeScreen = () => {
                 </Text>
                 </TouchableOpacity>
 
-    <Pressable
-      onPress={handleRegister}
-      style={{
-        backgroundColor: "#32bea6",
-        marginTop: 10,
-        marginLeft: "auto",
-        marginRight: "auto",
-        padding: 10,
-        borderRadius: 20,
-        width: "80%",
-      }}
-    >
-      <Text
-        style={{
-          color: "white",
-          fontSize: 18,
-          fontWeight: "bold",
-          textAlign: "center",
-        }}
-      >
-        Register
-      </Text>
-    </Pressable>
+   
     <TouchableOpacity
-  onPress={() => navigation.navigate("ForgotPasswordScreen")}
+  onPress={() => navigation.navigate("RegisterScreen")}
   style={{
-    backgroundColor: "#fd8b8b",
+    backgroundColor: "blue",
     borderRadius: 20,
     height: 40,
     width: 200,
@@ -145,10 +120,31 @@ const HomeScreen = () => {
     marginTop: 20,
   }}
 >
+
+  
   <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
-    Forgot password
-  </Text>
+  New user? Register here!  </Text>
 </TouchableOpacity>
+
+<TouchableOpacity
+  onPress={() => navigation.navigate("ForgotPasswordScreen")}
+  style={{
+    backgroundColor: "orange",
+    borderRadius: 20,
+    height: 40,
+    width: 200,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    marginTop: 20,
+  }}
+>
+
+  
+  <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
+  ForgotPasswordScreen  </Text>
+</TouchableOpacity>
+
   </View>
 </SafeAreaView>
 );
