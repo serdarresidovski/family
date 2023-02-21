@@ -7,6 +7,7 @@ import { firebase } from "../firebase";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [registerStatus, setRegisterStatus] = useState("");
@@ -41,8 +42,7 @@ const HomeScreen = () => {
         console.log("User registered successfully");
       })
       .catch((error) => {
-        setRegisterStatus(error.message);
-        console.log(error);
+        setRegisterStatus("This email is already in use");
       });
   };
   
@@ -65,6 +65,13 @@ const HomeScreen = () => {
           Email:
         </Text>
 
+        <TextInput
+          color="#64748b"
+          placeholder="Enter your name"
+          className="box-border h-12 w-64 px-4 self-center bg-slate-200 rounded-3xl"
+          value={name}
+          onChangeText={setName}
+        />
         <TextInput
           color="#64748b"
           placeholder="Family@member.com"
