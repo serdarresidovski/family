@@ -32,6 +32,7 @@ const HomeScreen = () => {
         "Password must be at least 8 characters long, contain at least one letter, one number and one special characters"
       );
       return;
+      
     }
 
     firebase
@@ -53,17 +54,16 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView className="bg-[#ffe0d5] h-screen">
-      <Text className="text-[#fd8b8b] flex self-center absolute top-12 font-semibold text-4xl ">
+      <Text className="text-[#fd8b8b] flex self-center font-semibold text-4xl ">
         Family<Text className="text-[#32bea6] font-semibold text-4xl">GO</Text>
       </Text>
 
-      <View className="box-border h-full w-5/6 self-center bg-slate-100  rounded-3xl mt-24">
-        <Text className="text-3xl text-slate-400 px-9 mt-10 mb-10">
-          <FontAwesome name="lock" color="" size={32} />
+      <View className="bg-[#ffe0d5] h-screen flex mt-[30%] items-center">
+      <View className="bg-slate-100 h-fit rounded-3xl p-10">
+        <Text className="text-3xl font-semibold text-slate-400 mb-5 self-center">
+          Register
         </Text>
-        <Text className="px-9 py-5 text-xl font-semibold text-slate-400">
-          Email:
-        </Text>
+        
 
         <TextInput
           color="#64748b"
@@ -74,46 +74,32 @@ const HomeScreen = () => {
         />
         <TextInput
           color="#64748b"
-          placeholder="Family@member.com"
-          className="box-border h-12 w-64 px-4 self-center bg-slate-200 rounded-3xl"
+          placeholder="Enter your email"
+          className="box-border mt-3 h-12 w-64 px-4 self-center bg-slate-200 rounded-3xl"
           value={email}
           onChangeText={setEmail}
         />
-        <Text className="px-9 py-5 text-xl font-semibold text-slate-400">
-          Password:
-        </Text>
 
         <TextInput
           color="#64748b"
           placeholder="Enter your password"
           secureTextEntry={true}
-          className="box-border h-12 w-64 px-4 self-center bg-slate-200 rounded-3xl"
+          className="box-border h-12 mt-3 w-64 px-4 self-center bg-slate-200 rounded-3xl"
           value={password}
           onChangeText={setPassword}
           />
 
         {registerStatus ? (
-          <Text style={{ color: registerStatus.startsWith("Registration successful") ? "green" : "red", marginBottom: 10, marginLeft: 30 }}>
+          <View className="mt-3 px-4 flex justify-center items-center rounded-3xl">
+          <Text className="w-52 self-center " style={{ color: registerStatus.startsWith("Registration successful") ? "green" : "red"}}>
             {registerStatus}
           </Text>
+          </View>
         ) : null}
-
-
-
-
-    
 
     <Pressable
       onPress={handleRegister}
-      style={{
-        backgroundColor: "#32bea6",
-        marginTop: 10,
-        marginLeft: "auto",
-        marginRight: "auto",
-        padding: 10,
-        borderRadius: 20,
-        width: "80%",
-      }}
+      className="rounded-3xl h-12 w-64 mb-5 flex justify-center items-center bg-teal-500 mt-10"
     >
       <Text
         style={{
@@ -128,21 +114,13 @@ const HomeScreen = () => {
     </Pressable>
     <TouchableOpacity
   onPress={() => navigation.navigate("HomeScreen")}
-  style={{
-    backgroundColor: "blue",
-    borderRadius: 20,
-    height: 40,
-    width: 200,
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    marginTop: 20,
-  }}
+  className="rounded-3xl h-12 w-64 flex justify-center items-center bg-[#449dc0]"
 >
   <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
-    Already a user? Login here!
+    Already a user?
   </Text>
 </TouchableOpacity>
+  </View>
   </View>
 </SafeAreaView>
 );
