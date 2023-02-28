@@ -5,12 +5,18 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { firebase } from "../firebase";
 
-const HomeScreen = () => {
+
+
+
+
+
+const RegisterScreen = () => {
   const navigation = useNavigation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [registerStatus, setRegisterStatus] = useState("");
+
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -18,39 +24,50 @@ const HomeScreen = () => {
     });
   }, []);
 
+
   const handleRegister = () => {
     const emailRegex = /\S+@\S+\.\S+/;
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  
+ 
+    if (name.trim().length === 0) {
+      setRegisterStatus("Mannen skriv ditt namn!");
+      return;
+    }
+
+
     if (!emailRegex.test(email)) {
       setRegisterStatus("Please enter a valid email address");
       return;
     }
-  
+ 
     if (!passwordRegex.test(password)) {
       setRegisterStatus(
         "Password must be at least 8 characters long, contain at least one letter, one number and one special characters"
       );
       return;
-      
+     
     }
+
 
     firebase
       .createUserWithEmailAndPassword(firebase.auth, email, password)
+      
       .then(() => {
-        navigation.replace("WelcomeScreen"); 
-        setRegisterStatus("Registration successful");
+        navigation.replace("WelcomeScreen");
         console.log("User registered successfully");
+        setRegisterStatus("Registration successful");
       })
       .catch((error) => {
         setRegisterStatus("This email is already in use");
       });
   };
-  
+ 
 
 
-  
-  
+
+
+ 
+
 
   return (
     <SafeAreaView className="bg-[#ffe0d5] h-screen">
@@ -58,12 +75,14 @@ const HomeScreen = () => {
         Family<Text className="text-[#32bea6] font-semibold text-4xl">GO</Text>
       </Text>
 
+
       <View className="bg-[#ffe0d5] h-screen flex mt-[30%] items-center">
       <View className="bg-slate-100 h-fit rounded-3xl p-10">
         <Text className="text-3xl font-semibold text-slate-400 mb-5 self-center">
           Register
         </Text>
-        
+       
+
 
         <TextInput
           color="#64748b"
@@ -80,6 +99,7 @@ const HomeScreen = () => {
           onChangeText={setEmail}
         />
 
+
         <TextInput
           color="#64748b"
           placeholder="Enter your password"
@@ -89,6 +109,7 @@ const HomeScreen = () => {
           onChangeText={setPassword}
           />
 
+
         {registerStatus ? (
           <View className="mt-3 px-4 flex justify-center items-center rounded-3xl">
           <Text className="w-52 self-center " style={{ color: registerStatus.startsWith("Registration successful") ? "green" : "red"}}>
@@ -96,6 +117,7 @@ const HomeScreen = () => {
           </Text>
           </View>
         ) : null}
+
 
     <Pressable
       onPress={handleRegister}
@@ -116,6 +138,12 @@ const HomeScreen = () => {
   onPress={() => navigation.navigate("HomeScreen")}
   className="rounded-3xl h-12 w-64 flex justify-center items-center bg-[#449dc0]"
 >
+
+
+
+
+
+
   <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
     Already a user?
   </Text>
@@ -126,4 +154,8 @@ const HomeScreen = () => {
 );
 };
 
-export default HomeScreen;
+
+export default RegisterScreen;
+
+
+
