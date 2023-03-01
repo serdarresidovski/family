@@ -33,7 +33,7 @@ const WelcomeScreen = () => {
       </View>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate("Mediation")}
+        onPress={() => navigation.navigate("Message")}
         style={{
           // backgroundColor: "#61dafb",
           padding: 10,
