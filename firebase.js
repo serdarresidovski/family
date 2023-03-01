@@ -17,27 +17,30 @@
 // const app = initializeApp(firebaseConfig);
 
 
-
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAUdWnApggfSPXmdydHk11VH5J5G0qGHmc",
-    authDomain: "fg-900.firebaseapp.com",
-    projectId: "fg-900",
-    storageBucket: "fg-900.appspot.com",
-    messagingSenderId: "638705337573",
-    appId: "1:638705337573:web:c7b5b97eb62a76705b400c"
-  };
-  
+  apiKey: "AIzaSyAUdWnApggfSPXmdydHk11VH5J5G0qGHmc",
+  authDomain: "fg-900.firebaseapp.com",
+  projectId: "fg-900",
+  storageBucket: "fg-900.appspot.com",
+  messagingSenderId: "638705337573",
+  appId: "1:638705337573:web:c7b5b97eb62a76705b400c"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  
-  export const firebase = {
-    auth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-  };
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+
+export const firebase = {
+  auth,
+  firestore,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+};
+
+
+

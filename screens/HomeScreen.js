@@ -28,7 +28,7 @@ const HomeScreen = () => {
       .signInWithEmailAndPassword(firebase.auth, email, password)
       .then(() => {
         console.log("User logged in successfully");
-        navigation.replace("WelcomeScreen");
+        navigation.replace("TaskPage");
       })
       .catch((error) => {
         setLoginStatus("incorrect e-mail or password");

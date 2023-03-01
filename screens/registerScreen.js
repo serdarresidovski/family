@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { firebase } from "../firebase";
 
-const HomeScreen = () => {
+const RegisterScreen = () => {
   const navigation = useNavigation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -38,7 +38,7 @@ const HomeScreen = () => {
     firebase
       .createUserWithEmailAndPassword(firebase.auth, email, password)
       .then(() => {
-        navigation.replace("WelcomeScreen"); 
+        navigation.replace("TaskPage"); 
         setRegisterStatus("Registration successful");
         console.log("User registered successfully");
       })
@@ -126,4 +126,4 @@ const HomeScreen = () => {
 );
 };
 
-export default HomeScreen;
+export default RegisterScreen;

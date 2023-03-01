@@ -1,9 +1,8 @@
-import { View, Text, Pressable, TextInput, TouchableOpacity, MaskedViewIOS, Animated } from "react-native";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-
+import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { firebase } from "../firebase";
+import EvilIcons from '@expo/vector-icons/EvilIcons';
 
 const TaskPage = () => {
   const navigation = useNavigation();
@@ -14,59 +13,137 @@ const TaskPage = () => {
     });
   }, []);
 
-  
-
 
   return (
-
-    <SafeAreaView className="bg-[#ffe0d5] h-screen">
-    <Text className="text-[#fd8b8b] flex self-center absolute top-12 font-semibold text-4xl ">
-      Family<Text className="text-[#32bea6] font-semibold text-4xl">GO</Text>
-    </Text>
-
-       <View className="box-border h-full w-5/6 self-center bg-slate-100  rounded-3xl mt-24">
-        <TouchableOpacity className="text-3xl px-20 border-b-2 border-slate-200">
-          <Text className="text-slate-300">
-            Hej
-          </Text>
-        <Text className="text-slate-400 px-52 mb-4">
-        <FontAwesome name="plus" size={20}/> 
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
+        <Text style={{ fontSize: 32, fontWeight: "bold", margin: 20 }}>
+          Welcome to FamilyGO!
+          TaskPage
         </Text>
-        </TouchableOpacity>
-
+      </View>
+     
+     
+      
+      <View style={{ height: 10, marginVertical: 20, paddingBottom: 10 }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', height: 60 }}>
+          <TouchableOpacity 
+            onPress={() => navigation.navigate("TaskPage")} 
+            style={{ alignItems: 'center' }}
+          >
+            <EvilIcons name="chart" size={42} color="blue" />
+          </TouchableOpacity>
+          <TouchableOpacity 
+            onPress={() => navigation.navigate("ShopScreen")} 
+            style={{ alignItems: 'center' }}
+          >
+            <EvilIcons name="trophy" color="black" size={42}/>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            onPress={() => navigation.navigate("WelcomeScreen")} 
+            style={{ alignItems: 'center' }}
+          >
+            <EvilIcons name="user" size={42} color="black" />
+          </TouchableOpacity>
         </View>
+      </View>
 
-        {/*<TextInput
-          color="#64748b"
-          placeholder="Family@member.com"
-          className="box-border h-12 w-64 px-4 self-center bg-slate-200 rounded-3xl"
-        />
-        <Text className="px-9 py-5 text-xl font-semibold text-slate-400">
-          Password:
-        </Text>
-
-        <TextInput
-          color="#64748b"
-          placeholder="**********"
-          secureTextEntry={true}
-          className="box-border h-12 w-64 px-4 self-center bg-slate-200 rounded-3xl"
-        />
-        <TouchableOpacity className="border-slate-300 self-center py-2 px-5 rounded mt-8">
-          <Text className="text-[#fd8b8b] font-semibold text-xl">Log In</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity className=" self-center mt-5 py-10 px-5">
-          <Text className="text-slate-500 font-semibold text-xl">Register</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity className=" self-center py-16 px-3">
-          <View className="py-2">
-            <Text className="text-slate-400">Forgot password</Text>
-          </View>
-        </TouchableOpacity>
-      </View> */}
     </SafeAreaView>
   );
 };
 
 export default TaskPage;
+
+// import React, { useState } from "react";
+// import { useNavigation } from "@react-navigation/native";
+// import { SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
+// import { firebase } from "../firebase";
+
+// import "firebase/firestore";
+
+
+// import EvilIcons from '@expo/vector-icons/EvilIcons';
+
+// const TaskPage = () => {
+//   const navigation = useNavigation();
+//   const [tasks, setTasks] = useState([]);
+//   const [newTaskName, setNewTaskName] = useState("");
+//   const [newTaskDescription, setNewTaskDescription] = useState("");
+//   const [newTaskPoints, setNewTaskPoints] = useState("");
+
+//   const addTask = async () => {
+//     const taskRef = firebase.firestore().collection("tasks").doc();
+//     await taskRef.set({
+//       name: newTaskName,
+//       description: newTaskDescription,
+//       points: parseInt(newTaskPoints),
+//     });
+//     setNewTaskName("");
+//     setNewTaskDescription("");
+//     setNewTaskPoints("");
+//   };
+  
+//   const getTasks = () => {
+//     firebase.firestore().collection("tasks").onSnapshot((snapshot) => {
+//       const tasksList = snapshot.docs.map((doc) => ({
+//         ...doc.data(),
+//         id: doc.id,
+//       }));
+//       setTasks(tasksList);
+//     });
+//   };
+  
+
+//   useState(() => {
+//     getTasks();
+//   }, []);
+
+//   const totalPoints = tasks.reduce((accumulator, task) => accumulator + task.points, 0);
+
+//   return (
+//     <SafeAreaView style={{ flex: 1 }}>
+//       <View style={{ flex: 1 }}>
+//         <Text style={{ fontSize: 32, fontWeight: "bold", margin: 20 }}>
+//           Welcome to FamilyGO! TaskPage
+//         </Text>
+//         <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 20 }}>
+//           <TextInput
+//             style={{ flex: 1, marginRight: 10 }}
+//             placeholder="Task name"
+//             value={newTaskName}
+//             onChangeText={(text) => setNewTaskName(text)}
+//           />
+//           <TextInput
+//             style={{ flex: 1, marginRight: 10 }}
+//             placeholder="Task description"
+//             value={newTaskDescription}
+//             onChangeText={(text) => setNewTaskDescription(text)}
+//           />
+//           <TextInput
+//             style={{ flex: 1 }}
+//             placeholder="Task points"
+//             value={newTaskPoints}
+//             onChangeText={(text) => setNewTaskPoints(text)}
+//             keyboardType="numeric"
+//           />
+//           <TouchableOpacity onPress={addTask}>
+//             <Text style={{ color: "blue", fontWeight: "bold" }}>Add task</Text>
+//           </TouchableOpacity>
+//         </View>
+//         <Text style={{ fontSize: 24, margin: 20 }}>Total points: {totalPoints}</Text>
+//         {tasks.map((task) => (
+//           <View key={task.id} style={{ margin: 20 }}>
+//             <Text style={{ fontSize: 20, fontWeight: "bold" }}>{task.name}</Text>
+//             <Text style={{ fontSize: 16 }}>{task.description}</Text>
+//             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+//               <EvilIcons name="star" size={24} color="#FFD700" style={{ marginRight: 5 }} />
+//               <Text style={{ fontSize: 18 }}>{task.points} points</Text>
+//             </View>
+//           </View>
+//         ))}
+//       </View>
+//     </SafeAreaView>
+//   );
+// };
+
+// export default TaskPage;
