@@ -4,6 +4,7 @@ import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { firebase } from "../firebase";
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { Image } from 'react-native';
+import { Alert } from "react-native";
 
 
 const WelcomeScreen = () => {
@@ -17,12 +18,28 @@ const WelcomeScreen = () => {
   }, []);
 
   const handleLogout = () => {
-    firebase.auth.signOut().then(() => {
-      console.log("Logged out successfully");
-      navigation.replace("HomeScreen");
-    }).catch((error) => {
-      console.log(error);
-    });
+    Alert.alert(
+      "Logout",
+      "Are you sure you want to logout?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Logout",
+          onPress: () => {
+            firebase.auth.signOut().then(() => {
+              console.log("Logged out successfully");
+              navigation.replace("HomeScreen");
+            }).catch((error) => {
+              console.log(error);
+            });
+          },
+          style: "destructive"
+        }
+      ]
+    );
   };
 
   return (
@@ -126,7 +143,7 @@ const WelcomeScreen = () => {
             onPress={() => navigation.navigate("TaskPage")} 
             style={{ alignItems: 'center' }}
           >
-            <EvilIcons name="eye" size={42} color="black" />
+            <EvilIcons name="chart" size={42} color="black" />
           </TouchableOpacity>
           <TouchableOpacity 
             onPress={() => navigation.navigate("ShopScreen")} 

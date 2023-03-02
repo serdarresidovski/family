@@ -97,14 +97,14 @@ const getPermissionAsync = async () => {
 if (Constants.platform.ios) {
 const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
 if (status !== "granted") {
-alert("Lak mannen ge tillstånd!");
+alert("You have to provide camera roll access to add pictures!");
 }
 }
 };
 
 const addNewItem = () => {
 if (name.trim() === "") {
-alert("Please enter a name for the item");
+alert("Enter a name for the item");
 return;
 }
 
@@ -156,41 +156,58 @@ console.error(error);
 };
 
 return (
-<SafeAreaView style={styles.container}>
-<View style={styles.header}>
-<Text style={styles.headerText}>Welcome to FamilyGO! ShopScreen</Text>
-<View style={styles.pointsContainer}>
-<EvilIcons name="trophy" color="gold" size={24} />
-<Text style={styles.pointsText}>{points}</Text>
-</View>
-</View>
+
+  <SafeAreaView className="bg-[#ffe0d5] h-screen">
+  <View>
+  <Text className="text-[#fd8b8b] flex self-center font-semibold text-4xl ">
+    Family<Text className="text-[#32bea6] font-semibold text-4xl">GO</Text>
+  </Text>
+  </View>
+  <View className="box-border border-2 border-slate-100 w-[80%] mt-10 flex justify-center self-center h-fit bg-slate-100 rounded-3xl">
 <View style={styles.formContainer}/>
+
+<Text className="text-xl mb-3 text-slate-400 font-bold self-center">
+Task Manager
+</Text>
+
 <TextInput
        value={name}
        onChangeText={setName}
        placeholder="Enter name of item"
-       style={styles.textInput}
+       className="self-center bg-slate-200 h-12 w-64 rounded-3xl px-4 mb-5"
      />
 
 <TextInput
       value={description}
       onChangeText={setDescription}
       placeholder="Enter description of item"
-      style={styles.textInput}
+      className="bg-slate-200 h-12 w-64 rounded-3xl px-4 mb-5 self-center"
     />
 
-    <TouchableOpacity onPress={pickImage} style={styles.button}>
-      <Text style={styles.buttonText}>Add Image</Text>
+    <TextInput
+      value={description}
+      onChangeText={setDescription}
+      placeholder="Enter description of item"
+      className="bg-slate-200 h-12 w-64 rounded-3xl px-4 mb-5 self-center"
+    />
+
+    <TouchableOpacity onPress={pickImage} className="rounded-3xl h-12 w-64 self-center flex justify-center items-center bg-[#449dc0]">
+      <Text className="text-xl self-center text-slate-100">Add Image</Text>
     </TouchableOpacity>
 
     {image && (
-      <Image source={{ uri: image }} style={styles.image} />
+      <Image source={{ uri: image }} className="w-[200px] h-[200px] mt-[20px] self-center rounded-3xl" />
     )}
 
-<TouchableOpacity onPress={addNewItem} style={{ margin: 10 }}>
-  <Text style={{ fontSize: 20, color: "blue" }}>Add Item</Text>
-</TouchableOpacity>
+{/* width: 200,
+    height: 200,
+    marginTop: 20,
+    alignSelf: "center", */}
 
+<TouchableOpacity onPress={addNewItem} className="rounded-3xl h-12 w-64 flex justify-center items-center mt-3 mb-5 bg-teal-500 self-center">
+  <Text className="text-xl self-center text-slate-100">Publish Item</Text>
+</TouchableOpacity>
+</View>
 
 
 
