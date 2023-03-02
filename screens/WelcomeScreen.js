@@ -3,6 +3,8 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { firebase } from "../firebase";
 import EvilIcons from '@expo/vector-icons/EvilIcons';
+import { Image } from 'react-native';
+
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
@@ -23,203 +25,102 @@ const WelcomeScreen = () => {
     });
   };
 
-
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView className="bg-[#ffe0d5] h-screen">
       <View style={{ flex: 1 }}>
-        <Text style={{ fontSize: 32, fontWeight: "bold", margin: 20 }}>
-          Welcome to FamilyGO!
-        </Text>
+      <Text className="text-[#fd8b8b] flex self-center font-semibold text-4xl ">
+        Family<Text className="text-[#32bea6] font-semibold text-4xl">GO</Text>
+      </Text>
       </View>
 
+      <Image
+  source={require('../img/IMG_8956.jpg')}
+  style={{ width: 100, height: 100, alignSelf: 'center', marginBottom: 30, borderRadius: 50 }}
+/>
+
+
+      <View className="bg-[#ffe0d5] flex mb-[10%] items-center">
+      <View className="bg-slate-100 h-fit rounded-3xl w-[80%] p-10">
       <TouchableOpacity
         onPress={() => navigation.navigate("Mediation")}
-        style={{
-          // backgroundColor: "#61dafb",
-          padding: 10,
-          borderRadius: 20,
-          width: "100%",
-          marginBottom: 10,
-        }}
-      >
-        <Text
-          style={{
-            color: "black",
-            fontSize: 22,
-            fontWeight: "bold",
-            textAlign: "left",
-            marginLeft: 20,
-          }}
+        className="w-full self-center mb-5"
         >
+          <Text
+            className="text-2xl self-center font-bold text-slate-500"
+          >
           Message
         </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => navigation.navigate("BonusSystem")}
-        style={{
-          // backgroundColor: "#ff6b6b",
-          padding: 10,
-          borderRadius: 20,
-          width: "100%",
-          marginBottom: 10,
-        }}
-      >
-        <Text
-          style={{
-            color: "black",
-            fontSize: 22,
-            fontWeight: "bold",
-            textAlign: "left",
-            marginLeft: 20,
-          }}
+        className="w-full self-center mb-5"
         >
+          <Text
+            className="text-2xl self-center font-bold text-slate-500"
+          >
           Bonus System
         </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => navigation.navigate("InviteFamily")}
-        style={{
-          // backgroundColor: "#50c878",
-          padding: 10,
-          borderRadius: 20,
-          width: "100%",
-          marginBottom: 10,
-        }}
-      >
-        <Text
-          style={{
-            color: "black",
-            fontSize: 22,
-            fontWeight: "bold",
-            textAlign: "left",
-            marginLeft: 20,
-          }}
+        className="w-full self-center mb-5"
         >
+          <Text
+            className="text-2xl self-center font-bold text-slate-500"
+          >
           Invite Family
         </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => navigation.navigate("Subscription")}
-        style={{
-          // backgroundColor: "#ffb6c1",
-          padding: 10,
-          borderRadius: 20,
-          width: "100%",
-          marginBottom: 10,
-        }}
-      >
-        <Text
-          style={{
-            color: "black",
-            fontSize: 22,
-            fontWeight: "bold",
-            textAlign: "left",
-            marginLeft: 20,
-          }}
+        className="w-full self-center mb-5"
         >
+          <Text
+            className="text-2xl self-center font-bold text-slate-500"
+          >
           Subscription
         </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => navigation.navigate("AddTask")}
-        style={{
-          // backgroundColor: "#e6e6e6",
-          padding: 10,
-          borderRadius: 20,
-          width: "100%",
-          marginBottom: 10,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingLeft: 30,
-          paddingRight: 20,
-        }}
-      >
-       
-       <Text
-      style={{
-        color: "black",
-        fontSize: 22,
-        fontWeight: "bold",
-        textAlign: "left",
-      }}
-    >
+        className="w-full self-center mb-5"
+        >
+          <Text
+            className="text-2xl self-center font-bold text-slate-500"
+          >
       Add Task
     </Text>
-    <EvilIcons name="chevron-right" size={30} color="black" />
   </TouchableOpacity>
-
-  {/* <TouchableOpacity
-        onPress={() => navigation.navigate("AddTask")}
-        style={{
-          // backgroundColor: "#ffb6c1",
-          padding: 10,
-          borderRadius: 20,
-          width: "100%",
-          marginBottom: 10,
-        }}
-      >
-        <Text
-          style={{
-            color: "black",
-            fontSize: 22,
-            fontWeight: "bold",
-            textAlign: "left",
-            marginLeft: 20,
-          }}
-        >
-          AddTask
-        </Text>
-      </TouchableOpacity> */}
 
   <TouchableOpacity
         onPress={() => navigation.navigate("Help")}
-        style={{
-          // backgroundColor: "#ffb6c1",
-          padding: 10,
-          borderRadius: 20,
-          width: "100%",
-          marginBottom: 10,
-        }}
-      >
-        <Text
-          style={{
-            color: "black",
-            fontSize: 22,
-            fontWeight: "bold",
-            textAlign: "left",
-            marginLeft: 20,
-          }}
+        className="w-full self-center mb-5"
         >
+          <Text
+            className="text-2xl self-center font-bold text-slate-500"
+          >
           Help
         </Text>
       </TouchableOpacity>
 
   <TouchableOpacity
     onPress={handleLogout}
-    style={{
-      // backgroundColor: "red",
-      padding: 10,
-      borderRadius: 20,
-      width: "100%",
-      marginBottom: 10,
-    }}
+    className="box-border rounded-3xl self-center w-2/3 bg-red-300 mt-[20%]"
   >
     <Text
-      style={{
-        color: "red",
-        fontSize: 22,
-        fontWeight: "bold",
-        textAlign: "center",
-      }}
+      className="text-2xl self-center font-bold text-slate-50"
     >
       Logout
     </Text>
   </TouchableOpacity>
+  </View>
+  </View>
+
+
   <View style={{ flexDirection: 'row', justifyContent: 'space-around', height: 35 }}>
           <TouchableOpacity 
             onPress={() => navigation.navigate("TaskPage")} 
