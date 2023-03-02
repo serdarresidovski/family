@@ -17,12 +17,11 @@ const ShopScreen = () => {
 
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView className="bg-[#ffe0d5] h-screen">
       <View style={{ flex: 1 }}>
-        <Text style={{ fontSize: 32, fontWeight: "bold", margin: 20 }}>
-          Welcome to FamilyGO!
-          ShopScreen
-        </Text>
+      <Text className="text-[#fd8b8b] flex self-center font-semibold text-4xl ">
+        Family<Text className="text-[#32bea6] font-semibold text-4xl">GO</Text>
+      </Text>
       </View>
      
      
